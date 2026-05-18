@@ -1,7 +1,6 @@
 
-export const getWeatherData = async () => {
+export const getWeatherData = async (location) => {
     const API_KEY = import.meta.env.VITE_API_KEY;
-    const location = document.querySelector("#locationInput").value.trim();
     console.log(location);
 
     const unitGroup = "metric";
@@ -18,7 +17,6 @@ export const getWeatherData = async () => {
         console.log("Weather data:", data);
     } catch (err) {
         console.error("Failed to fetch data", err);
-
     }
 }
 

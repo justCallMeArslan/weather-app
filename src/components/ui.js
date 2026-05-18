@@ -1,4 +1,4 @@
-export function userRequest(handler) {
+export function userRequest(handleLocation) {
 
     const form = document.querySelector(".userForm");
     const input = document.querySelector("#locationInput");
@@ -9,6 +9,6 @@ export function userRequest(handler) {
 
         const location = input.value.trim();
 
-        handler(location)
+        handleLocation(location)
     })
 }
