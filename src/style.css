@@ -67,7 +67,7 @@ h6 {
 
 /* ul autocomplete styling */
 
-.autocomplete {
+.cityChoice {
   position: relative;
   width: 300px;
 }
@@ -95,12 +95,16 @@ h6 {
 .suggestions li {
   padding: 10px;
   cursor: pointer;
+
 }
 
 .suggestions li:hover {
   background: #eee;
 }
 
+li {
+    list-style: none;
+}
 
 /* input */
 

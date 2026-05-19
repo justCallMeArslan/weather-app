@@ -21,7 +21,7 @@ export const getWeatherData = async (location) => {
 
 
 export const inputAutoComplete = async (query) => {
-    if (!query || query < 1) return [];
+    if (!query || query.length < 2) return [];
 
     const url = `https://geocoding-api.open-meteo.com/v1/search?name=${query}&count=7`;
 
