@@ -1,7 +1,6 @@
 import './style.css'
-import { getWeatherData } from './components/logic';
-import { userRequest } from './components/ui';
+import { getWeatherData, inputAutoComplete } from './components/logic';
+import { userRequest, setupAutocomplete} from './components/ui';
 
 userRequest(getWeatherData);
-
-
+setupAutocomplete(inputAutoComplete);

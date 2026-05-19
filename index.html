@@ -12,8 +12,14 @@
 <body>
   <form class="userForm">
     <label for="locationInput">Your location:</label>
-    <input type="text" id="locationInput" name="city">
+
+    <div class="autocomplete">
+      <input type="text" id="locationInput" name="city" required placeholder="Aishok city">
+      <ul class="suggest"></ul>
+    </div>
+
     <button class="userFormBtn">Forecast</button>
+
   </form>
 
   <div id="app"></div>

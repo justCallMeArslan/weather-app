@@ -19,3 +19,28 @@ export const getWeatherData = async (location) => {
     }
 }
 
+
+export const inputAutoComplete = async (query) => {
+    if (!query || query < 1) return [];
+
+    const url = `https://geocoding-api.open-meteo.com/v1/search?name=${query}&count=7`;
+
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw Error(`Error: ${response.status} - ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        // [] fallback used as safety precaution that received data can be corrupted
+        console.log(data.results);
+        return data.results || []; // open-meteo provides API example with results responsibe for data
+
+
+
+    } catch (err) {
+        console.error("Failed to fetch", err);
+    }
+
+}
+
