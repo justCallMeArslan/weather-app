@@ -161,7 +161,7 @@ body::before {
 .output {
   margin-top: 40px;
   width: 100%;
-  min-width: 320px;
+  min-width: 340px;
   max-width: 380px;
   box-sizing: border-box;
   background: rgba(255, 255, 255, 0.6);

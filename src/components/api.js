@@ -1,5 +1,10 @@
 
 export const getWeatherData = async (location) => {
+    console.log("🔥 WEATHER INPUT:", location, typeof location);
+    if (!location || typeof location !== "string") {
+        throw new Error("Invalid location passed to weather API");
+    }
+
     const API_KEY = import.meta.env.VITE_API_KEY;
     const unitGroup = "metric";
     const contentType = "json";
@@ -36,11 +41,38 @@ export const inputAutoComplete = async (query) => {
         console.log(data.results);
         return data.results || []; // open-meteo provides API example with results responsibe for data
 
-
-
     } catch (err) {
         console.error("Failed to fetch", err);
     }
 
 }
 
+
+export async function getCityName(lat, lon) {
+    const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`;
+    const res = await fetch(url, {
+        headers: { // required for API
+            "Accept": "application/json",
+            "User-Agent": "weather-app-demo"
+        }
+    });
+    if (!res.ok) throw new Error("Reverse geocoding failed");
+    const data = await res.json();
+    return {
+        name: data.address?.city || data.address?.town || data.address?.village,
+        country: data.address?.country
+    };
+}
+
+export async function geoWeatherHandler(lat, lon) {
+    console.log("DEBUG coords:", lat, lon);
+    const city = await getCityName(lat, lon);
+    console.log("DEBUG city:", city);
+    const location =
+        city?.name && city?.country
+            ? `${city.name}, ${city.country}`
+            : `${lat},${lon}`;
+    console.log("DEBUG location:", location);
+
+    return await getWeatherData(location);
+}

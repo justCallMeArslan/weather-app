@@ -1,5 +1,6 @@
 import { format } from "date-fns";
 
+
 export function userRequest(handler) {
 
     const form = document.querySelector(".userForm");
@@ -93,6 +94,8 @@ export function setupAutocomplete(handler) {
 
 export function renderSuggestions(cities) {
     const list = document.querySelector(".suggest");
+    const input = document.querySelector("#locationInput");
+    if (!list || !input) return;
     const getFlag = (countryCode) => {
         return countryCode
             .toUpperCase()
@@ -100,17 +103,29 @@ export function renderSuggestions(cities) {
             .map(c => String.fromCodePoint(127397 + c.charCodeAt(0)))
             .join("");
     }
-    if (!list) return;
+
     list.innerHTML = "";
     cities.forEach(city => {
         const li = document.createElement("li");
         const flag = getFlag(city.country_code);
         li.textContent = `${flag} ${city.name}, ${city.country}`;
         li.addEventListener("click", () => {
-            document.querySelector("#locationInput").value = flag + " " + city.name + ", " + city.country;
-            list.innerHTML = "";
+            input.value = flag + " " + city.name + ", " + city.country;
+            list.innerHTML = ""; //clear dropdown
+            input.form.requestSubmit(); // to proc submit 
         })
 
         list.appendChild(li);
+    });
+}
+
+
+export function getGeolocation(handler) {
+    window.addEventListener("load", () => {
+        if (!navigator.geolocation) return;
+
+        navigator.geolocation.getCurrentPosition(async (pos) => {
+            handler(pos.coords.latitude, pos.coords.longitude);
+        });
     });
 }
