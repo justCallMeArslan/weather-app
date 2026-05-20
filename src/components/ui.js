@@ -22,13 +22,9 @@ export function userRequest(handler) {
 
 
 export function renderWeather(data) {
-
     const localTimeData = data.currentConditions.datetime;
     const localTime = new Date(`1969-01-01T${localTimeData}`).getHours();
-    console.log(localTime);
-
     const feelsLikeData = data.days[0].hours[localTime].feelslike;
-
     const sunriseData = data.currentConditions.sunrise;
     const sunriseTime = new Date(`1969-01-01T${sunriseData}`);
     const sunsetData = data.currentConditions.sunset;
@@ -36,33 +32,27 @@ export function renderWeather(data) {
 
     // current conditions
     const body = document.querySelector("#app");
-
     body.innerHTML = "";
-
     const renderContainer = document.createElement("div");
     renderContainer.classList.add("output")
-
     const main = document.createElement("div")
     main.classList.add("main")
     const address = document.createElement("p");
     address.textContent = data.address;
     const temp = document.createElement("p");
     temp.textContent = Math.round(data.currentConditions.temp) + " °C";
-
     const subOne = document.createElement("div");
     subOne.classList.add("subOne")
     const feelsLike = document.createElement("p");
     feelsLike.textContent = `Feels like: ${Math.round(feelsLikeData)} °C`;
     const conditions = document.createElement("p");
     conditions.textContent = data.currentConditions.conditions;
-
     const subTwo = document.createElement("div");
     subTwo.classList.add("subTwo")
     const humidity = document.createElement("p");
     humidity.textContent = "Humidity: " + Math.round(data.currentConditions.humidity) + "%";
     const windspeed = document.createElement("p");
     windspeed.textContent = "Wind: " + Math.round(data.currentConditions.windspeed) + " km/h";
-
     const subThree = document.createElement("div");
     subThree.classList.add("subThree")
     const sunrise = document.createElement("p");
@@ -80,7 +70,6 @@ export function renderWeather(data) {
 
 }
 
-
 export function setupAutocomplete(handler) {
     const input = document.querySelector("#locationInput");
 
@@ -90,7 +79,6 @@ export function setupAutocomplete(handler) {
         renderSuggestions(results)
     })
 }
-
 
 export function renderSuggestions(cities) {
     const list = document.querySelector(".suggest");
@@ -103,7 +91,6 @@ export function renderSuggestions(cities) {
             .map(c => String.fromCodePoint(127397 + c.charCodeAt(0)))
             .join("");
     }
-
     list.innerHTML = "";
     cities.forEach(city => {
         const li = document.createElement("li");
@@ -118,7 +105,6 @@ export function renderSuggestions(cities) {
         list.appendChild(li);
     });
 }
-
 
 export function getGeolocation(handler) {
     window.addEventListener("load", () => {

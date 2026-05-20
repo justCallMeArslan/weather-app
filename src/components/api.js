@@ -1,15 +1,9 @@
 
 export const getWeatherData = async (location) => {
-    console.log("🔥 WEATHER INPUT:", location, typeof location);
-    if (!location || typeof location !== "string") {
-        throw new Error("Invalid location passed to weather API");
-    }
-
     const API_KEY = import.meta.env.VITE_API_KEY;
     const unitGroup = "metric";
     const contentType = "json";
     const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=${unitGroup}&key=${API_KEY}&contentType=${contentType}`;
-
 
     try {
         const response = await fetch(url);
@@ -24,12 +18,9 @@ export const getWeatherData = async (location) => {
     }
 }
 
-
 export const inputAutoComplete = async (query) => {
     if (!query || query.length < 2) return [];
-
     const url = `https://geocoding-api.open-meteo.com/v1/search?name=${query}&count=7`;
-
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -38,15 +29,11 @@ export const inputAutoComplete = async (query) => {
 
         const data = await response.json();
         // [] fallback used as safety precaution that received data can be corrupted
-        console.log(data.results);
         return data.results || []; // open-meteo provides API example with results responsibe for data
-
     } catch (err) {
         console.error("Failed to fetch", err);
     }
-
 }
-
 
 export async function getCityName(lat, lon) {
     const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`;
@@ -65,14 +52,10 @@ export async function getCityName(lat, lon) {
 }
 
 export async function geoWeatherHandler(lat, lon) {
-    console.log("DEBUG coords:", lat, lon);
     const city = await getCityName(lat, lon);
-    console.log("DEBUG city:", city);
     const location =
         city?.name && city?.country
             ? `${city.name}, ${city.country}`
             : `${lat},${lon}`;
-    console.log("DEBUG location:", location);
-
     return await getWeatherData(location);
 }
