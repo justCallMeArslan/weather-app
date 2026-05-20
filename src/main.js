@@ -4,3 +4,4 @@ import { userRequest, setupAutocomplete} from './components/ui';
 
 userRequest(getWeatherData);
 setupAutocomplete(inputAutoComplete);
+
