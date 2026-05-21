@@ -5,18 +5,15 @@ export function userRequest(handler) {
 
     const form = document.querySelector(".userForm");
     const input = document.querySelector("#locationInput");
-
+    const list = document.querySelector(".suggest");
 
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
-
         const userInput = input.value.trim(); // sends userInput
-
         const data = await handler(userInput); //returns data
         renderWeather(data);
-
         input.value = "";
-        document.querySelector(".suggest").innerHTML = ""
+        list.innerHTML = "";
     })
 }
 
@@ -67,12 +64,10 @@ export function renderWeather(data) {
     subOne.append(feelsLike, conditions);
     subTwo.append(humidity, windspeed);
     subThree.append(sunrise, sunset)
-
 }
 
 export function setupAutocomplete(handler) {
     const input = document.querySelector("#locationInput");
-
     input.addEventListener("input", async (e) => {
         const value = e.target.value.trim();
         const results = await handler(value);
@@ -88,7 +83,8 @@ export function renderSuggestions(cities) {
         return countryCode
             .toUpperCase()
             .split("")
-            .map(c => String.fromCodePoint(127397 + c.charCodeAt(0)))
+            .map(c => String.fromCodePoint(127397 + c.charCodeAt(0))) // for flag usage 127397 
+            // from two letters
             .join("");
     }
     list.innerHTML = "";
