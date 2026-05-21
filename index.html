@@ -11,25 +11,38 @@
 
 <body>
 
-  <div class="brand">
-    <p>
-      AishokWeather.cupo
-    </p>
-  </div>
-  <form class="userForm">
+  <div class="appShell">
 
-    <label for="locationInput"></label>
-    <div class="cityChoice">
-      <input type="text" id="locationInput" name="city" autocomplete="off" required
-      placeholder="Your location...">
-      <ul class="suggest"></ul>
+    <article class="intro">
+
+      <h1>AishokWeather - controls weather inside and outside!</h1>
+      <p>
+        Introducing AishokWeather — a lightweight and responsive weather
+        application that combines accurate forecasting with a clean modern design.
+        Built around simplicity and usability, it offers a focused experience that keeps
+        weather information easy to read and pleasant to explore.
+      </p>
+    </article>
+    <form class="userForm">
+
+      <label for="locationInput"></label>
+      <div class="cityChoice">
+        <input type="text" id="locationInput" name="city" autocomplete="off" required placeholder="Your location...">
+        <ul class="suggest"></ul>
+      </div>
+
+      <!-- <button class="userFormBtn">Forecast</button> -->
+
+    </form>
+
+    <div id="app"></div>
+
+    <div class="brand">
+      <p>
+        AishokWeather.cupo
+      </p>
     </div>
-
-    <!-- <button class="userFormBtn">Forecast</button> -->
-
-  </form>
-
-  <div id="app"></div>
+  </div>
 </body>
 
 </html>

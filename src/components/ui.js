@@ -97,7 +97,7 @@ export function renderSuggestions(cities) {
         const flag = getFlag(city.country_code);
         li.textContent = `${flag} ${city.name}, ${city.country}`;
         li.addEventListener("click", () => {
-            input.value = flag + " " + city.name + ", " + city.country;
+            input.value = city.name + ", " + city.country;
             list.innerHTML = ""; //clear dropdown
             input.form.requestSubmit(); // to proc submit 
         })
